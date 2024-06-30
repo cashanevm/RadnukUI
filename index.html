@@ -33,12 +33,13 @@
 <!-- Add your site or application content here -->
 <p>Hello world! This is HTML5 Boilerplate.</p>
 <script src="js/app.js"></script>
+<input id="2" type="text">
 <h1 id="1"></h1>
 <button onclick="fetchData()">Fetch Data</button>
 
 <script>
   function fetchData() {
-    fetch('http://localhost:8080/test', {})
+    fetch("https://cdn.cookielaw.org/consent/c3d9f1e3-55f3-4eba-b268-46cee4c6789c/018f2f76-a777-7516-9013-d62aa1453fd3/en.json", {})
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -46,7 +47,7 @@
         return response.json();
       })
       .then(data => {
-        document.getElementById("1").textContent = data.test
+        document.getElementById("1").textContent = data.CommonData.AllowHostOptOut
         // Further processing of data if needed
       })
       .catch(error => {
