@@ -25,9 +25,39 @@
 
 <body>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/app.js"></script>
+<!-- Add your site or application content here -->
+<p>Hello world! This is HTML5 Boilerplate.</p>
+<script src="js/app.js"></script>
+<h1 id="1"></h1>
+<script>
+  let tg = window.Telegram.WebApp;
+  tg.expand()
+
+
+  let initDataURLSP = new URLSearchParams(WebApp.initData);
+  var hash = initDataURLSP.get('hash');
+
+  initDataURLSP.delete('hash');
+  initDataURLSP.sort();
+  var checkDataString = initDataURLSP.toString().replaceAll('&', '\n');
+
+  let xhrURL = new URL('https://api.work.ua/dictionaries');
+  xhrURL.searchParams.set('hash', hash);
+  xhrURL.searchParams.set('checkDataString', checkDataString);
+
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', xhrURL);
+  xhr.send();
+  xhr.onload = function () {
+    // if (JSON.parse(xhr.response).result == true) {
+    document.getElementById("1").textContent=xhr.response.status
+    WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}., ${(JSON.parse(xhr.response).salary_resume}`);
+    // } else {
+    //   WebApp.showAlert("Ты что, хакер?");
+    //   WebApp.close();
+    // }
+  }
+</script>
 
 </body>
 
