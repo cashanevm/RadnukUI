@@ -19,7 +19,7 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon.png">
 
-<!--  <link rel="manifest" href="site.webmanifest">-->
+  <!--  <link rel="manifest" href="site.webmanifest">-->
   <meta name="theme-color" content="#fafafa">
 </head>
 
@@ -29,55 +29,25 @@
 <p>Hello world! This is HTML5 Boilerplate.</p>
 <script src="js/app.js"></script>
 <h1 id="1"></h1>
+<button onclick="fetchData()">Fetch Data</button>
+
 <script>
-  // Get the domain of the current page
-  var domain = window.location.hostname;
-
-  // Display the domain in the paragraph with id "domain"
-  document.getElementById("1").textContent = domain;
-</script>
-<script>
-  let tg = window.Telegram.WebApp;
-  tg.expand()
-
-  fetch('http://localhost:8080/test', {
-
-  })
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      console.log(data)
-    })
-    .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
-    });
-
-
-  // let initDataURLSP = new URLSearchParams(WebApp.initData);
-  // var hash = initDataURLSP.get('hash');
-  //
-  // initDataURLSP.delete('hash');
-  // initDataURLSP.sort();
-  // var checkDataString = initDataURLSP.toString().replaceAll('&', '\n');
-
-  // let xhrURL = new URL('http://localhost:8080/test');
-  // // xhrURL.searchParams.set('hash', hash);
-  // // xhrURL.searchParams.set('checkDataString', checkDataString);
-  //
-  // let xhr = new XMLHttpRequest();
-  // xhr.open('GET', xhrURL);
-  // xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
-  // xhr.send();
-  // xhr.onload = function () {
-  //   // if (JSON.parse(xhr.response).result == true) {
-  //   document.getElementById("1").textContent=xhr.response.status
-  //  // WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}., ${(JSON.parse(xhr.response).salary_resume}`);
-  //   // } else {
-  //   //   WebApp.showAlert("Ты что, хакер?");
-  //   //   WebApp.close();
-  //   // }
-  // }
+  function fetchData() {
+    fetch('http://localhost:8080/test', {})
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById("1").textContent = data.test
+        // Further processing of data if needed
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
 </script>
 
 </body>
